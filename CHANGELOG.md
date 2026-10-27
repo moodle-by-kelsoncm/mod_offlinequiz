@@ -1,8 +1,8 @@
 CHANGELOG
 =========
-5.2.03
+5.2.04
 -----------------
-* [Security] Removed unused bundled jQuery 1.7.2, jQuery UI 1.8.x builds, qunit and bgiframe (Code scanning alerts); only jQuery 1.4.3 with the UI core/widget/mouse/draggable modules used by the correction pages remain
+* [Security] Removed all bundled jQuery 1.4.3/1.7.2 and jQuery UI 1.8.x copies, qunit and bgiframe (Code scanning alerts). The correction pages (correct.php, participants_correct.php) no longer use jQuery: they use plain JavaScript and the new js/dragcorners.js for the draggable corner markers
 
 
 5.2.02

@@ -402,26 +402,24 @@ echo "</style>\n";
 echo '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>';
 
 // Print JavaScript-includes.
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/jquery-1.4.3.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.core.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.widget.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.mouse.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.draggable.js');
+echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/js/dragcorners.js');
 
 $javascript = "<script language=\"JavaScript\">
  function checkinput(alert) {
    insecuremarkings = false;
    missinguserid = false;
    for (i=1; i<=" . count($participants) . "; i++) {
-      checkbox = $('input[name^=\"participants[' + i + '\"]');
-      userid = $('input[name^=\"userid[' + i + '\"]');
-      if (checkbox.attr('value') == 'X') {
+      checkbox = document.querySelector('input[name^=\"participants[' + i + '\"]');
+      userid = document.querySelector('input[name^=\"userid[' + i + '\"]');
+      checkvalue = checkbox ? checkbox.value : undefined;
+      uservalue = userid ? userid.value : undefined;
+      if (checkvalue == 'X') {
           insecuremarkings = true;
           if (alert) {
               alert(\"" . addslashes(get_string('insecuremarkings', 'offlinequiz')) . "\");
           }
       }
-      if (checkbox.attr('value') == '1' && userid.attr('value') == '0') {
+      if (checkvalue == '1' && uservalue == '0') {
           document.getElementById('b'+i).setAttribute('class', 'barcodeselect barcodeerror');
           missinguserid = true;
           if (alert) {
@@ -435,7 +433,9 @@ $javascript = "<script language=\"JavaScript\">
        if (alert) {
 
        } else {
-         $('input[name^=\"submitbutton1\"]').removeAttr('disabled');
+         document.querySelectorAll('input[name^=\"submitbutton1\"]').forEach(function(button) {
+             button.removeAttribute('disabled');
+         });
        }
    }
 }
@@ -670,13 +670,5 @@ lass', 'barcodeselect');}; checkinput(false);\">\n>";
             " style=\"position:absolute; top:" .
             ($hotspot->y - 7) . "px; left:" . ($hotspot->x - 7) . "px; cursor:pointer;\">";
     }
-    echo "</form>\n
-        <script>
-    $(function() {
-        $( \"#c-0\" ).draggable();
-        $( \"#c-1\" ).draggable();
-        $( \"#c-2\" ).draggable();
-        $( \"#c-3\" ).draggable();
-    });
-    </script>";
+    echo "</form>\n";
 }
