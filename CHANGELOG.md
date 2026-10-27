@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+5.2.02
+-----------------
+* [Security] Image URLs in the student view preview (mod_form.js) are now validated (http/https only)
+
+
 5.2.0
 -----------------
 * [Feature] 5.2 compatible version
