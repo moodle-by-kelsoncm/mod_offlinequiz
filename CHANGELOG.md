@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+5.2.04
+-----------------
+* [Security] Removed all bundled jQuery 1.4.3/1.7.2 and jQuery UI 1.8.x copies, qunit and bgiframe (Code scanning alerts). The correction pages (correct.php, participants_correct.php) no longer use jQuery: they use plain JavaScript and the new js/dragcorners.js for the draggable corner markers
+
+
 5.2.02
 -----------------
 * [Security] Image URLs in the student view preview (mod_form.js) are now validated (http/https only)

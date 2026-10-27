@@ -967,16 +967,12 @@ echo ".imagebutton {width:250px; height:24px; text-align:left; margin-bottom:10p
 echo "</style>\n";
 echo '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>';
 
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/jquery-1.4.3.min.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.core.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.widget.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.mouse.js');
-echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/lib/jquery/ui/jquery.ui.draggable.js');
+echo html_writer::script('', $CFG->wwwroot . '/mod/offlinequiz/js/dragcorners.js');
 
 $javascript = "<script language=\"JavaScript\">
 function checkinput() {
- // Get all item elements. We have jquery!
- items = $('input[name^=\"item\"]');
+ // Get all item elements.
+ items = document.querySelectorAll('input[name^=\"item\"]');
 
  for (i=0; i < items.length; i++) {
   if (items[i].value == '-1') {
@@ -1084,7 +1080,8 @@ function submitRotated() {
 }
 
 function toggleImage() {
-    img = $('#scannedimage').toggle();
+    img = document.getElementById('scannedimage');
+    img.style.display = (img.style.display === 'none') ? '' : 'none';
 }
 </script>";
 
@@ -1343,11 +1340,3 @@ if ($sheetloaded) {
 }
 ?>
 
-<script>
-$(function() {
-    $( "#c-0" ).draggable();
-    $( "#c-1" ).draggable();
-    $( "#c-2" ).draggable();
-    $( "#c-3" ).draggable();
-});
-</script>
