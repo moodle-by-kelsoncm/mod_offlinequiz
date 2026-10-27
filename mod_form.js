@@ -24,6 +24,22 @@
  * @license       http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Returns the URL only when it is an http(s) URL, otherwise an empty string.
+ * Avoids assigning DOM text with unexpected schemes (e.g. javascript:) to an image source.
+ *
+ * @param {string} url Candidate image URL.
+ * @return {string} The normalised URL or ''.
+ */
+function safeImageUrl(url) {
+    try {
+        var parsed = new URL(url, window.location.href);
+        return (parsed.protocol === 'http:' || parsed.protocol === 'https:') ? parsed.href : '';
+    } catch (e) {
+        return '';
+    }
+}
+
 function showStudentView() {
     attempt = document.getElementById('id_attemptclosed').checked && !document.getElementById('id_attemptclosed').disabled;
     correctness = document.getElementById('id_correctnessclosed').checked && !document.getElementById('id_correctnessclosed').disabled;
@@ -104,7 +120,7 @@ function showStudentView() {
         var img = document.createElement('img');
         img.id = 'image1';
         img.style.width = '100%';
-        img.src = imagefile1;
+        img.src = safeImageUrl(imagefile1);
         var br = document.createElement('br');
         popup.append(img, br);
     }
@@ -113,7 +129,7 @@ function showStudentView() {
         var img = document.createElement('img');
         img.id = 'image2';
         img.style.width = '100%';
-        img.src = imagefile2;
+        img.src = safeImageUrl(imagefile2);
         var br = document.createElement('br');
         popup.append(img, br);
     }
@@ -122,7 +138,7 @@ function showStudentView() {
         var img = document.createElement('img');
         img.id = 'image3';
         img.style.width = '100%';
-        img.src = imagefile3;
+        img.src = safeImageUrl(imagefile3);
         var br = document.createElement('br');
         popup.append(img, br);
     }
@@ -136,7 +152,7 @@ function showStudentView() {
         var img = document.createElement('img');
         img.id = 'image4';
         img.style.width = '100%';  // Use style for percentage-based width
-        img.src = pagefile;
+        img.src = safeImageUrl(pagefile);
         popup.appendChild(img);
 
         var br = document.createElement('br');
