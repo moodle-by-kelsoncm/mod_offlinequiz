@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+5.2.03
+-----------------
+* [Security] Removed unused bundled jQuery 1.7.2, jQuery UI 1.8.x builds, qunit and bgiframe (Code scanning alerts); only jQuery 1.4.3 with the UI core/widget/mouse/draggable modules used by the correction pages remain
+
+
 5.2.02
 -----------------
 * [Security] Image URLs in the student view preview (mod_form.js) are now validated (http/https only)
